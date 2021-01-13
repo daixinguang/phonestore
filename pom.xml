@@ -7,6 +7,8 @@
         <module>ps-user</module>
         <module>ps-registry</module>
         <module>ps-gateway</module>
+        <module>ps-common</module>
+        <module>ps-item</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

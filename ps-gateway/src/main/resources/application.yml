@@ -2,7 +2,7 @@ server:
   port: 10010
 spring:
   application:
-    name: leyou-gateway
+    name: ps-gateway
 eureka:
   client:
     registry-fetch-interval-seconds: 5
@@ -10,3 +10,21 @@ eureka:
       defaultZone: http://127.0.0.1:10086/eureka
 zuul:
   prefix: /api # 路由路径前缀
+  # retryable: true # 请求重试
+  routes:
+    user-service: /user/** # 用户微服务
+    item-server:
+      path: /item/**
+      service-id: item-service
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 5000 # 熔断超时时长5000ms
+ribbon: # AbstractRibbonCommand
+  ConnectTimeout: 1000 # ribbon 链接超时时长
+  ReadTimeout: 3500 # ribbon 读取超时时长
+  MaxAutoRetries: 0 # 当前服务器重试次数
+  MaxAutoRetriesMextServer: 0 # 切换服务重试次数
